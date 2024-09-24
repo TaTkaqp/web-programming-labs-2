@@ -117,3 +117,83 @@ def created ():
     </body>
 </html>
 ''', 201
+
+from flask import abort
+
+@app.route("/lab1/400")
+def error_400():
+    return '''
+<!doctype html>
+<html>
+    <body>
+        <h1>400: Bad Request</h1>
+        <p>Ошибка 400: Сервер не может обработать запрос из-за ошибки клиента.</p>
+        <a href="/lab1">На страницу лабораторной 1</a>
+    </body>
+</html>
+    ''', 400
+
+@app.route("/lab1/401")
+def error_401():
+    return '''
+<!doctype html>
+<html>
+    <body>
+        <h1>401: Unauthorized</h1>
+        <p>Ошибка 401: Необходима аутентификация для доступа к ресурсу.</p>
+        <a href="/lab1">На страницу лабораторной 1</a>
+    </body>
+</html>
+    ''', 401
+
+@app.route("/lab1/402")
+def error_402():
+    return '''
+<!doctype html>
+<html>
+    <body>
+        <h1>402: Payment Required</h1>
+        <p>Ошибка 402: Требуется оплата для доступа к ресурсу.</p>
+        <a href="/lab1">На страницу лабораторной 1</a>
+    </body>
+</html>
+    ''', 402
+
+@app.route("/lab1/403")
+def error_403():
+    return '''
+<!doctype html>
+<html>
+    <body>
+        <h1>403: Forbidden</h1>
+        <p>Ошибка 403: Доступ к ресурсу запрещен.</p>
+        <a href="/lab1">На страницу лабораторной 1</a>
+    </body>
+</html>
+    ''', 403
+
+@app.route("/lab1/405")
+def error_405():
+    return '''
+<!doctype html>
+<html>
+    <body>
+        <h1>405: Method Not Allowed</h1>
+        <p>Ошибка 405: Метод запроса не поддерживается данным ресурсом.</p>
+        <a href="/lab1">На страницу лабораторной 1</a>
+    </body>
+</html>
+    ''', 405
+
+@app.route("/lab1/418")
+def error_418():
+    return '''
+<!doctype html>
+<html>
+    <body>
+        <h1>418: I'm a teapot</h1>
+        <p>Ошибка 418: Я чайник. Запрос не может быть обработан, так как сервер — это чайник.</p>
+        <a href="/lab1">На страницу лабораторной 1</a>
+    </body>
+</html>
+    ''', 418
