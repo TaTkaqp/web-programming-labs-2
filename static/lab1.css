@@ -1,0 +1,30 @@
+body {
+    background-color: #c58080; 
+    color: black; 
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    color: #071055;
+     font-size: 40px
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+    width: 600px; /* Задайте ширину изображения */
+    height: auto; 
+}
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #c58080; /* Цвет ссылки */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #00b300; /* Цвет при наведении */
+}
