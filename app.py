@@ -6,7 +6,7 @@ def not_found (err):
      return"Такой страницы не существует", 404
 
 @app.route("/")
-@app.route("/web")
+@app.route("/lab1/web")
 def web ():
     return """<!doctype html> 
         <html> 
@@ -18,8 +18,8 @@ def web ():
              'Content-Type': 'text/plain; charset=utf-8'
         }
 
-@app.route("/info")
-def info ():
+@app.route("/lab1/author")
+def author ():
     name = "Бугаёва Наталья Владимировна"
     group = "ФБИ-21"
     faculty = "ФБ"
@@ -34,18 +34,27 @@ def info ():
             <body>
         </html>"""
 
-@app.route ('/lab1/oak')
+@app.route("/lab1/info")
+def info ():
+     return redirect ("/lab1/author")
+
+@app.route("/lab1/oak")
 def oak():
-    path = url_for ("static", filename="oak.jpg")
-    return '''
+    css_path = url_for("static", filename="lab1.css")
+    img_path = url_for("static", filename="oak.jpg")
+    return """
 <!doctype html>
 <html>
+    <head>
+        <link rel="stylesheet" type="text/css" href='""" + css_path + """'>
+    </head>
     <body>
         <h1>Дуб</h1>
-        <img src =" '''+path+''' ">
+        <img src='""" + img_path + """'>
+        <a href="/web">web</a>
     </body>
 </html>
-'''
+"""
 
 count = 0
 
