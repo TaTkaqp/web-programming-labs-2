@@ -1,6 +1,24 @@
 from flask import Flask, url_for, redirect
 app = Flask (__name__)
 
+@app.route("/lab1")
+def lab1():
+    return """
+<!doctype html>
+<html>
+    <head>
+        <title>Лабораторная 1</title>
+    </head>
+    <body>
+        <p>
+            Flask — фреймворк для создания веб-приложений на языке программирования Python, использующий набор инструментов Werkzeug, а также шаблонизатор Jinja2. 
+            Относится к категории так называемых микрофреймворков — минималистичных каркасов веб-приложений, сознательно предоставляющих лишь самые базовые возможности.
+        </p>
+        <a href="/">На главную</a>
+    </body>
+</html>
+    """
+
 @app.errorhandler(404)
 def not_found (err):
      return"Такой страницы не существует", 404
