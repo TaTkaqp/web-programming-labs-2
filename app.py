@@ -55,3 +55,15 @@ def counter ():
     </body>
 </html>
 '''
+
+@app.route ("/lab1/created")
+def created ():
+     return '''
+<!doctype html>
+<html>
+    <body>
+        <h1>Создано успешно</h1>
+        <div><i>Это как-то было создано...</i></div>
+    </body>
+</html>
+''', 201
