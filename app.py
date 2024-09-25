@@ -172,6 +172,62 @@ def error_403():
 </html>
     ''', 403
 
+@app.errorhandler(404)
+def handle_404_error(err):
+    css_path = url_for("static", filename="lab1.css")
+    img_path = url_for("static", filename="404_image.png")
+    
+    return f"""
+    <!doctype html>
+    <html>
+        <head>
+            <title>Ошибка 404 - Страница не найдена</title>
+            <link rel="stylesheet" type="text/css" href="{css_path}">
+            <style>
+                body {{
+                    font-family: Arial, sans-serif;
+                    text-align: center;
+                    background-color: #f8f9fa;
+                    color: #343a40;
+                }}
+                .container {{
+                    margin-top: 50px;
+                }}
+                h1 {{
+                    font-size: 3em;
+                    margin-bottom: 20px;
+                }}
+                p {{
+                    font-size: 1.2em;
+                    margin-bottom: 30px;
+                }}
+                img {{
+                    width: 300px;
+                    height: auto;
+                    margin-bottom: 30px;
+                }}
+                a {{
+                    text-decoration: none;
+                    color: #007bff;
+                    font-weight: bold;
+                }}
+                a:hover {{
+                    color: #0056b3;
+                }}
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <h1>Ой! Страница не найдена (404)</h1>
+                <img src="{img_path}" alt="404 error">
+                <p>Кажется, Вы попали не туда. Давайте вернемся на главную страницу и попробуем снова!</p>
+                <a href="/">Вернуться на главную</a>
+            </div>
+        </body>
+    </html>
+    """, 404
+
+
 @app.route("/lab1/405")
 def error_405():
     return '''
@@ -187,13 +243,75 @@ def error_405():
 
 @app.route("/lab1/418")
 def error_418():
-    return '''
-<!doctype html>
-<html>
-    <body>
-        <h1>418: I'm a teapot</h1>
-        <p>Ошибка 418: Я чайник. Запрос не может быть обработан, так как сервер — это чайник.</p>
-        <a href="/lab1">На страницу лабораторной 1</a>
-    </body>
-</html>
+    css_path = url_for("static", filename="lab1.css")
+    img_path = url_for("static", filename="teapot.jpg")
+    return f'''
+    <!doctype html>
+    <html>
+        <head>
+            <link rel="stylesheet" type="text/css" href="{css_path}">
+        </head>
+        <body>
+            <h1>418: I'm a teapot</h1>
+            <p>Ошибка 418: Cервер отказывается заваривать кофе, поскольку он постоянно является чайником</p>
+            <img src="{img_path}" alt="I'm a teapot">
+            <br>
+            <a href="/lab1">На страницу лабораторной 1</a>
+        </body>
+    </html>
     ''', 418
+
+
+@app.errorhandler(500)
+def internal_server_error(err):
+    css_path = url_for("static", filename="lab1.css")
+    
+    return f"""
+    <!doctype html>
+    <html>
+        <head>
+            <title>Ошибка 500 - Внутренняя ошибка сервера</title>
+            <link rel="stylesheet" type="text/css" href="{css_path}">
+            <style>
+                body {{
+                    font-family: Arial, sans-serif;
+                    text-align: center;
+                    background-color: #f8f9fa;
+                    color: #343a40;
+                }}
+                .container {{
+                    margin-top: 50px;
+                }}
+                h1 {{
+                    font-size: 3em;
+                    margin-bottom: 20px;
+                }}
+                p {{
+                    font-size: 1.2em;
+                    margin-bottom: 30px;
+                }}
+                a {{
+                    text-decoration: none;
+                    color: #007bff;
+                    font-weight: bold;
+                }}
+                a:hover {{
+                    color: #0056b3;
+                }}
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <h1>Ошибка 500 - Внутренняя ошибка сервера</h1>
+                <p>На сервере произошла ошибка. Пожалуйста, попробуйте позже.</p>
+                <a href="/">Вернуться на главную</a>
+            </div>
+        </body>
+    </html>
+    """, 500
+
+@app.route("/lab1/error")
+def generate_error():
+    # Пример ошибки деления на ноль
+    error = 1 / 0
+    return "This will not be reached because of the error"
