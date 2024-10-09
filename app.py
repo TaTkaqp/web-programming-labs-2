@@ -63,7 +63,8 @@ def not_found (err):
 @app.route("/lab1/web")
 def web ():
     css_path = url_for("static", filename="lab1.css")
-    return """<!doctype html> 
+    return f'''
+    <!doctype html> 
         <html> 
         <head>
             <title>Лабораторная 1</title>
@@ -72,7 +73,7 @@ def web ():
             <body> 
                <h1>web-сервер на flask<h1> 
             </body> 
-        </html>""",200, {
+        </html> ''',200, {
              'X-Server': 'sample',
              'Content-Type': 'text/plain; charset=utf-8'
         }
@@ -83,19 +84,19 @@ def author ():
     group = "ФБИ-21"
     faculty = "ФБ"
     css_path = url_for("static", filename="lab1.css")
-    return """
+    return f'''
         <!doctype html>
         <html>
         <head>
-            <link rel="stylesheet" type="text/css" href='""" + css_path + """'>
+            <link rel="stylesheet" type="text/css" href="{css_path}">
         </head>
             <body>
-                <p>Студент: """+ name +"""</p>
-                <p>Группа: """+ group +"""</p>
-                <p>Факультет: """+ faculty +"""</p>
+                <p>Студент: '''+ name +'''</p>
+                <p>Группа: '''+ group +'''</p>
+                <p>Факультет: '''+ faculty +'''</p>
                 <a href="/web">web</a>
             <body>
-        </html>"""
+        </html>'''
 
 @app.route("/lab1/info")
 def info ():
@@ -105,19 +106,19 @@ def info ():
 def oak():
     css_path = url_for("static", filename="lab1.css")
     img_path = url_for("static", filename="oak.jpg")
-    return """
+    return f'''
 <!doctype html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href='""" + css_path + """'>
+        <link rel="stylesheet" type="text/css" href="{css_path}">
     </head>
     <body>
         <h1>Дуб</h1>
-        <img src='""" + img_path + """'>
+        <img src='{img_path} '>
         <a href="/web">web</a>
     </body>
 </html>
-"""
+'''
 
 count = 0
 
@@ -126,11 +127,11 @@ def counter():
     global count
     count += 1
     css_path = url_for("static", filename="lab1.css")
-    return '''
+    return f'''
 <!doctype html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="''' + css_path + '''">
+        <link rel="stylesheet" type="text/css" href="{css_path}">
     </head>
     <body>
         Сколько раз вы сюда заходили: ''' + str(count) + ''' <br>
@@ -144,9 +145,12 @@ def counter():
 def reset_counter():
     global count
     count = 0
-    return '''
+    return f'''
 <!doctype html>
 <html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{css_path}">
+    </head>
     <body>
         Счётчик обнулён!<br>
         <a href="/lab1/counter">Вернуться к счётчику</a><br>
@@ -158,11 +162,11 @@ def reset_counter():
 @app.route ("/lab1/created")
 def created ():
      css_path = url_for("static", filename="lab1.css")
-     return '''
+     return f'''
 <!doctype html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href='""" + css_path + """'>
+        <link rel="stylesheet" type="text/css" href="{css_path}">
     </head>
     <body>
         <h1>Создано успешно</h1>
@@ -176,11 +180,11 @@ from flask import abort
 @app.route("/lab1/400")
 def error_400():
     css_path = url_for("static", filename="lab1.css")
-    return '''
+    return f'''
 <!doctype html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href='""" + css_path + """'>
+        <link rel="stylesheet" type="text/css" href="{css_path}">
     </head>
     <body>
         <h1>400: Bad Request</h1>
@@ -192,9 +196,12 @@ def error_400():
 
 @app.route("/lab1/401")
 def error_401():
-    return '''
+    return f'''
 <!doctype html>
 <html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{css_path}">
+    </head>
     <body>
         <h1>401: Unauthorized</h1>
         <p>Ошибка 401: Необходима аутентификация для доступа к ресурсу.</p>
@@ -218,9 +225,12 @@ def error_402():
 
 @app.route("/lab1/403")
 def error_403():
-    return '''
+    return f'''
 <!doctype html>
 <html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{css_path}">
+    </head>
     <body>
         <h1>403: Forbidden</h1>
         <p>Ошибка 403: Доступ к ресурсу запрещен.</p>
@@ -234,7 +244,7 @@ def handle_404_error(err):
     css_path = url_for("static", filename="lab1.css")
     img_path = url_for("static", filename="404_image.png")
     
-    return f"""
+    return f'''
     <!doctype html>
     <html>
         <head>
@@ -282,14 +292,17 @@ def handle_404_error(err):
             </div>
         </body>
     </html>
-    """, 404
+    ''', 404
 
 
 @app.route("/lab1/405")
 def error_405():
-    return '''
+    return f'''
 <!doctype html>
 <html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{css_path}">
+    </head>
     <body>
         <h1>405: Method Not Allowed</h1>
         <p>Ошибка 405: Метод запроса не поддерживается данным ресурсом.</p>
@@ -323,7 +336,7 @@ def error_418():
 def internal_server_error(err):
     css_path = url_for("static", filename="lab1.css")
     
-    return f"""
+    return f'''
     <!doctype html>
     <html>
         <head>
@@ -365,7 +378,7 @@ def internal_server_error(err):
             </div>
         </body>
     </html>
-    """, 500
+    ''', 500
 
 @app.route("/lab1/error")
 def generate_error():
