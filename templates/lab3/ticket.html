@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{# номер лабораторной работы: #}
+{% block lab %}  Лабораторная работа 3 {% endblock %}
+
+{# основной контент: #}
+{% block main %}
+
+    <div>
+        <h1>Покупка железнодорожного билета</h1>
+
+        <form action="/lab3/train">
+            <div>
+                Взрослый билет:
+                <div>1000&#x20bd;</div>
+            </div>
+
+            <div>
+                Детский билет:
+                <div>700&#x20bd;</div>
+            </div>
+
+            <div>
+                ФИО:
+                <label>
+                    <input type="text" name="FIO" required>
+                    
+                </label>
+            </div>
+
+            <div>
+                Возраст:
+                <label>
+                    <input type="number" name="age" min="1" max="120" required>
+                </label>
+            </div>
+
+            <div>Выберите полку:</div>
+
+            <div>
+                <label>
+                    <input type="radio" value="up" name="shelf" checked>верхняя
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    <input type="radio" value="up-side" name="shelf">верхняя боковая
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    <input type="radio" value="lower" name="shelf">нижняя
+                    <div>100&#x20bd;</div>
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    <input type="radio" value="lower-side" name="shelf">нижняя боковая
+                    <div>100&#x20bd;</div>
+                </label>
+            </div>
+
+            <div>Наличие белья:</div>
+
+            <div>
+                <label>
+                    <input type="radio" value="withlinen" name="linen" checked>с бельем
+                    <div>75&#x20bd;</div>
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    <input type="radio" value="nolinen" name="linen">без белья
+                </label>
+            </div>
+
+            <div>Наличие багажа:</div>
+
+            <div>
+                <label>
+                    <input type="radio" value="withbaggage" name="baggage" checked>с багажом
+                    <div>250&#x20bd;</div>
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    <input type="radio" value="nobaggage" name="baggage">без багажа
+                </label>
+            </div>
+
+            <div>
+                Пункт выезда:
+                <label>
+                    <input class="FIO" type="text" name="place1" required>
+                </label>
+            </div>
+
+            <div>
+                Пункт назначения:
+                <label>
+                    <input class="FIO" type="text" name="place2" required>
+                </label>
+            </div>
+
+            <div>
+                Дата поездки:
+                <label>
+                    <input class="FIO" type="date" name="date" required>
+                </label>
+            </div>
+
+            <div>Наличие страховки:</div>
+
+            <div>
+                <label>
+                    <input type="radio" value="withbelay" name="belay" checked>со страховкой
+                    <div>150&#x20bd;</div>
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    <input type="radio" value="nobelay" name="belay">без страховки
+                </label>
+            </div>
+
+            <div>
+                <button type="submit">Показать билет</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
