@@ -170,7 +170,7 @@ def fridge():
     if request.method == 'POST':
         temperature = request.form.get('temperature')
         if temperature == '':
-            message = 'Ошибка: емпература не задана'
+            message = 'Ошибка: температура не задана'
         else:
             temperature = int(temperature)
             if temperature < -12:
