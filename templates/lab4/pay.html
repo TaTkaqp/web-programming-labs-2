@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block lab %} Оплата {% endblock %}
+
+{% block main %}
+    <h2>Заказ успешно сформирован!</h2>
+    <p>Вы заказали {{ grain_type }}.</p>
+    <p>Вес: {{ weight }} тонн.</p>
+    <p>Сумма к оплате: {{ total_cost }} руб.</p>
+    {% if discount %}
+        <p>Применена скидка 10% за большой объём в размере: {{ discount }} руб.</p>
+    {% endif %}
+    <a href="/lab4/grain">Вернуться назад</a>
+{% endblock %}

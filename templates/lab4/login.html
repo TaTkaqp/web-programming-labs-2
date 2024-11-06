@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{# номер лабораторной работы: #}
+{% block lab %}  Лабораторная работа 4 {% endblock %}
+
+{# основной контент: #}
+{% block main %}
+    {% if authorized %}
+        <h1>Добро пожаловать, {{ name }}!</h1>
+        <form action="/lab4/logout" method="post">
+            <button>Выход</button>
+        </form>
+    {% else %}
+        <h1>Вход</h1>
+        <h2>Пожалуйста, авторизуйтесь</h2>
+        <form method="post">   
+            <label for="name">Имя пользователя:</label>
+            <input type="text" id="name" name="name" value="{{ name or '' }}">
+                    
+            <label for="sex">Пол:</label>
+            <select name="sex">
+                <option {% if sex == 'мужской' %}selected{% endif %}>мужской</option>
+                <option {% if sex == 'женский' %}selected{% endif %}>женский</option>
+            </select>
+                  
+            <label for="login">Пользователь:</label>
+            <input  type="text" id="login" name="login" value="{{ login or '' }}">
+                  
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" value="{{ password or '' }}">
+       
+            <div class="error">{{ error }}</div>
+                    
+            <button type="submit">Войти</button>
+            <button type="reset">Отмена</button> 
+        </form>
+    {% endif %}
+{% endblock %}

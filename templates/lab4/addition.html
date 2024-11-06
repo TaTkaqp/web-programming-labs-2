@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{# номер лабораторной работы: #}
+{% block lab %}  Сложение чисел {% endblock %}
+
+{# основной контент: #}
+{% block main %}
+    <h1>Сложение чисел</h1>
+    {{ x1 }} + {{ x2 }} = {{ result }}
+    <a href="/lab4/addition-form">Вернуться назад</a>
+{% endblock %}
