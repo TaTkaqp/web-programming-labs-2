@@ -3,6 +3,13 @@ body {
     color: black; 
     font-family: Arial, sans-serif;
 }
+footer {
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    padding: 10px;
+}
 
 h1 {
     text-align: center;
