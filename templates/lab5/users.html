@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{# номер лабораторной работы: #}
+{% block lab %}  Лабораторная работа 5 {% endblock %}
+
+{# основной контент: #}
+{% block main %}
+    {% if users %}
+            <h1>Зарегистрированные пользователи</h1>
+            <ul>
+                {% for user in users %}
+                    <li>{{ user['login'] }}</li>
+                {% endfor %}
+            </ul>
+    {% else %}
+            <h2>Пользователи не найдены</h2>
+    {% endif %}
+{% endblock %}
