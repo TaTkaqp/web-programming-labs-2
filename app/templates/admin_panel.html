@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Flask Messenger</title>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='reset.css') }}"
+		/>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='style.css') }}"
+		/>
+		<style>
+			body {
+				font-family: "Arial", sans-serif;
+				background-color: #f4f4f9;
+				margin: 0;
+				padding: 0;
+			}
+
+			h1 {
+				text-align: center;
+				margin-top: 20px;
+				font-size: 2em;
+				color: #333;
+			}
+
+			.user-list {
+				width: 80%;
+				margin: 20px auto;
+				padding: 0;
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+
+			th,
+			td {
+				padding: 15px;
+				text-align: left;
+				border: 1px solid #ddd;
+			}
+
+			th {
+				background-color: #007bff;
+				color: white;
+			}
+
+			tr:nth-child(even) {
+				background-color: #f2f2f2;
+			}
+
+			.delete-account-btn {
+				background-color: red;
+				color: white;
+				border: none;
+				padding: 10px 20px;
+				border-radius: 5px;
+				cursor: pointer;
+				font-weight: bold;
+				transition: background-color 0.3s;
+				width: auto;
+			}
+
+			.delete-account-btn:hover {
+				background-color: darkred;
+			}
+
+			.flash-message {
+				padding: 10px;
+				margin: 10px 0;
+				border-radius: 5px;
+			}
+
+			.flash-message.danger {
+				background-color: #f8d7da;
+				color: #721c24;
+			}
+
+			.flash-message.success {
+				background-color: #d4edda;
+				color: #155724;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<p class="student-info">Бугаёва Наталья Владимировна ФБИ-21</p>
+			<nav>
+				{% if current_user.is_authenticated %}
+				<a href="{{ url_for('logout') }}">Logout</a>
+				{% else %}
+				<a href="{{ url_for('login') }}">Login</a>
+				<a href="{{ url_for('register') }}">Register</a>
+				{% endif %}
+			</nav>
+		</header>
+
+		<main class="container">
+			<h1>Admin Panel</h1>
+			<table class="user-list">
+				<thead>
+					<tr>
+						<th>Username</th>
+						<th>Role</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for user in users %}
+					<tr>
+						<td>{{ user.username }}</td>
+						<td>{{ user.role }}</td>
+
+						<td>
+							<!-- Кнопка для удаления пользователя -->
+							<form
+								method="POST"
+								action="{{ url_for('delete_user', user_id=user.id) }}"
+								style="display: flex; justify-content: center"
+							>
+								<button type="submit" class="delete-account-btn">Delete</button>
+							</form>
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</main>
+		<div class="message">
+			{% with messages = get_flashed_messages(with_categories=true) %} {% if
+			messages %}
+			<div class="flash-messages-container">
+				{% for category, message in messages %}
+				<div class="flash-message {{ category }}">{{ message }}</div>
+				{% endfor %}
+			</div>
+			{% endif %} {% endwith %} {% block content %}{% endblock %}
+		</div>
+	</body>
+</html>

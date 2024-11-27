@@ -1,0 +1,255 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #f4f4f9;
+	color: #333;
+	box-sizing: border-box;
+}
+
+html {
+	box-sizing: border-box;
+}
+
+header {
+	background-color: #6200ea;
+	color: white;
+	padding: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+header nav a {
+	color: white;
+	text-decoration: none;
+	margin-left: 10px;
+	font-size: 14px;
+}
+
+header nav a:hover {
+	text-decoration: underline;
+}
+
+.container {
+	max-width: 1400px;
+	padding: 0 20px;
+	margin: 0 auto;
+}
+
+.form-container {
+	max-width: 400px;
+	margin: 40px auto;
+	padding: 20px;
+	background-color: white;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+}
+
+.form-container h1 {
+	color: #6200ea;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.form-container p {
+	text-align: center;
+	margin-bottom: 20px;
+	font-size: 14px;
+	color: #555;
+}
+
+.form-group {
+	margin-bottom: 15px;
+}
+
+.form-group label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 5px;
+	font-size: 14px;
+}
+
+.form-group input {
+	width: 100%;
+	padding: 10px;
+	font-size: 14px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	outline: none;
+	box-sizing: border-box;
+}
+
+.form-group input:focus {
+	border-color: #6200ea;
+	box-shadow: 0 0 4px rgba(98, 0, 234, 0.3);
+}
+
+.form-button {
+	width: 100%;
+	padding: 10px;
+	background-color: #6200ea;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.form-button:hover {
+	background-color: #7e33f4;
+}
+
+.form-note {
+	text-align: center;
+	margin-top: 15px;
+	font-size: 14px;
+}
+
+.form-note a {
+	color: #6200ea;
+	text-decoration: none;
+}
+
+.form-note a:hover {
+	text-decoration: underline;
+}
+
+.flash-messages {
+	margin: 20px auto;
+	max-width: 400px;
+	text-align: center;
+}
+
+.flash {
+	padding: 10px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+
+.flash-error {
+	background-color: #ffcccc;
+	color: #a80000;
+}
+
+.flash-success {
+	background-color: #ccffcc;
+	color: #006600;
+}
+
+/* Стили для сообщений */
+.flash-messages {
+	list-style-type: none;
+	padding: 0;
+	margin: 10px 0;
+}
+
+.flash-message {
+	padding: 10px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	transition: opacity 1s ease;
+}
+
+.flash-message.success {
+	background-color: #28a745;
+	color: white;
+}
+
+.flash-message.danger {
+	background-color: #dc3545;
+	color: white;
+}
+
+.flash-message.warning {
+	background-color: #ffc107;
+	color: black;
+}
+
+.flash-message.info {
+	background-color: #17a2b8;
+	color: white;
+}
+/* Стили для контейнера сообщений */
+.flash-messages-container {
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	z-index: 1000;
+}
+
+.flash-message {
+	padding: 15px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	color: white;
+	background-color: #f44336; /* по умолчанию — красный для ошибок */
+	opacity: 1;
+	transition: opacity 1s ease-out, transform 1s ease-out;
+	font-size: 16px;
+}
+
+/* Стили для разных категорий сообщений */
+.flash-message.success {
+	background-color: #28a745;
+}
+
+.flash-message.danger {
+	background-color: #dc3545;
+}
+
+.flash-message.warning {
+	background-color: #ffc107;
+}
+
+.flash-message.info {
+	background-color: #17a2b8;
+}
+
+/* Плавное исчезновение сообщений */
+.flash-message.fade-out {
+	opacity: 0; /* Сделать прозрачным */
+	transform: translateX(30px); /* Перемещение вправо для эффекта */
+}
+
+/* Анимация при появлении сообщений */
+.flash-message {
+	animation: slideIn 0.5s ease-out forwards;
+}
+
+/* Анимация появления сообщений */
+@keyframes slideIn {
+	0% {
+		opacity: 0;
+		transform: translateX(30px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+textarea {
+	width: 100%;
+	height: 60px;
+	margin-bottom: 10px;
+}
+
+button {
+	width: 100%;
+	padding: 10px;
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #45a049;
+}
+
+p {
+	margin: 5px 0;
+}

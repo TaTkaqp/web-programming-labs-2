@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Chat with {{ user.username }}</title>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='style.css') }}"
+		/>
+		<style>
+			/* Общие стили */
+			body {
+				font-family: Arial, sans-serif;
+				background-color: #f9f9f9;
+				margin: 0;
+				padding: 0;
+			}
+
+			/* Заголовок страницы */
+			h1 {
+				text-align: center;
+				margin-top: 20px;
+				font-size: 1.8em;
+				color: #333;
+			}
+
+			/* Контейнер для сообщений */
+			.messages {
+				max-width: 800px;
+				margin: 20px auto;
+				padding: 15px;
+				background-color: #fff;
+				border-radius: 10px;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+				overflow-y: auto;
+				height: 60vh;
+			}
+
+			/* Сообщение */
+			.message {
+				display: flex;
+				flex-direction: column;
+				margin-bottom: 15px;
+			}
+
+			/* Отправленные сообщения */
+			.message.sent {
+				align-items: flex-end;
+			}
+
+			/* Полученные сообщения */
+			.message.received {
+				align-items: flex-start;
+			}
+
+			/* Стиль для текста сообщений */
+			.message p {
+				margin: 0;
+				padding: 5px;
+				background-color: #f1f1f1;
+				border-radius: 10px;
+				max-width: 70%;
+			}
+
+			/* Время сообщения */
+			.message .timestamp {
+				font-size: 0.8em;
+				color: gray;
+				margin-top: 5px;
+			}
+
+			/* Поле для ввода сообщения */
+			form {
+				display: flex;
+				align-items: center;
+				width: 100%;
+				max-width: 800px;
+				margin: 20px auto;
+			}
+
+			/* Текстовое поле */
+			textarea {
+				flex: 1;
+				padding: 10px;
+				border-radius: 5px;
+				border: 1px solid #ccc;
+				resize: none;
+				font-size: 1em;
+				outline: none;
+				height: 50px; /* Устанавливаем высоту равную кнопке */
+				margin: 0;
+			}
+
+			/* Кнопка отправки */
+			button {
+				background-color: #007bff;
+				color: white;
+				border: none;
+				padding: 10px 20px;
+				margin-left: 10px;
+				border-radius: 5px;
+				cursor: pointer;
+				font-size: 1em;
+				transition: background-color 0.3s;
+				height: 40px; /* Уменьшаем высоту кнопки */
+				width: auto;
+			}
+
+			/* Hover эффект для кнопки */
+			button:hover {
+				background-color: #0056b3;
+			}
+
+			/* Уведомление об отсутствии сообщений */
+			.no-messages {
+				text-align: center;
+				font-size: 1.2em;
+				color: #888;
+				margin-top: 30px;
+			}
+
+			.back-link {
+				text-decoration: none;
+				color: #007bff;
+				font-size: 1.2em;
+				margin-right: 10px; /* Расстояние между стрелкой и текстом */
+
+				margin-right: 30px;
+			}
+
+			.back-link:hover {
+				color: #0056b3;
+			}
+
+			.delete-button {
+				background-color: red;
+				color: white;
+				border: none;
+				padding: 5px 10px;
+				border-radius: 5px;
+				cursor: pointer;
+				font-size: 0.9em;
+				transition: background-color 0.3s;
+			}
+
+			.delete-button:hover {
+				background-color: darkred;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<p class="student-info">Бугаёва Наталья Владимировна ФБИ-21</p>
+			<nav>
+				<a href="{{ url_for('index') }}">Back to users</a>
+				<a href="{{ url_for('logout') }}">Logout</a>
+			</nav>
+		</header>
+
+		<main class="container">
+			<h1 class="title">
+				<a href="{{ url_for('index') }}" class="back-link">&#8592;</a>
+				Chat with {{ user.username }}
+			</h1>
+
+			<div class="messages">
+				{% if messages %} {% for message in messages %}
+				<div
+					class="message {{ 'sent' if message.sender_id == current_user.id else 'received' }}"
+				>
+					<div style="display: flex; height: auto">
+						<form
+							method="POST"
+							action="{{ url_for('delete_message', message_id=message.id) }}"
+							style="display: inline"
+						>
+							<button type="submit" class="delete-button">Delete</button>
+						</form>
+						<p>{{ message.sender.username }}: {{ message.text }}</p>
+					</div>
+					<p class="timestamp">
+						{{ message.timestamp.strftime('%Y-%m-%d %H:%M') }}
+					</p>
+				</div>
+				{% endfor %} {% else %}
+				<p class="no-messages">
+					No messages yet. Be the first to send a message!
+				</p>
+				{% endif %}
+			</div>
+
+			<form method="POST">
+				<textarea
+					name="message"
+					placeholder="Type a message"
+					required
+				></textarea>
+				<button type="submit">Send</button>
+			</form>
+
+			<div class="message">
+				{% with messages = get_flashed_messages(with_categories=true) %} {% if
+				messages %}
+				<div class="flash-messages-container">
+					{% for category, message in messages %}
+					<div class="flash-message {{ category }}">{{ message }}</div>
+					{% endfor %}
+				</div>
+				{% endif %} {% endwith %} {% block content %}{% endblock %}
+			</div>
+		</main>
+	</body>
+</html>

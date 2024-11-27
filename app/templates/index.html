@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Flask Messenger</title>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='reset.css') }}"
+		/>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='style.css') }}"
+		/>
+		<style>
+			/* Контейнер для всей страницы */
+			body {
+				font-family: "Arial", sans-serif;
+				background-color: #f4f4f9;
+				margin: 0;
+				padding: 0;
+			}
+
+			/* Заголовок */
+			h1 {
+				text-align: center;
+				margin-top: 20px;
+				font-size: 2em;
+				color: #333;
+			}
+
+			/* Контейнер для пользователей */
+			.user-list {
+				display: flex;
+				flex-direction: column;
+				width: 100%;
+				margin: 20px auto;
+				padding: 0;
+			}
+
+			/* Карточка пользователя */
+			.user {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				background-color: #fff;
+				padding: 20px;
+				margin-bottom: 15px;
+				border-radius: 10px;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+				width: 100%;
+				box-sizing: border-box;
+				transition: box-shadow 0.3s ease, transform 0.3s ease;
+				cursor: pointer;
+			}
+
+			/* Hover эффект для карточки пользователя */
+			.user:hover {
+				box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+				transform: translateY(-5px);
+			}
+
+			/* Информация о пользователе */
+			.user-info {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				margin-left: 15px;
+			}
+
+			/* Имя пользователя */
+			.user p {
+				margin: 0;
+				font-weight: bold;
+				font-size: 1.1em;
+				color: #333;
+			}
+
+			/* Последнее сообщение */
+			.user .last-message {
+				font-size: 0.95em;
+				color: gray;
+				margin-top: 5px;
+			}
+
+			/* Время отправки сообщения */
+			.user .message-time {
+				font-size: 0.85em;
+				color: #999;
+				margin-top: 5px;
+			}
+
+			/* Ссылка на чат */
+			.chat-link {
+				text-decoration: none;
+				color: #007bff;
+				font-weight: bold;
+				cursor: pointer;
+				transition: color 0.3s;
+				margin-left: 20px;
+			}
+
+			/* Hover эффект для ссылки */
+			.chat-link:hover {
+				color: #0056b3;
+			}
+
+			/* Кнопка "Open Chat" */
+			.open-chat-btn {
+				background-color: #007bff;
+				color: white;
+				border: none;
+				padding: 10px 20px;
+				border-radius: 5px;
+				cursor: pointer;
+				font-weight: bold;
+				transition: background-color 0.3s;
+				width: auto;
+			}
+
+			/* Hover эффект для кнопки */
+			.open-chat-btn:hover {
+				background-color: #0056b3;
+			}
+
+			/* Кнопка удаления аккаунта */
+			.delete-account-btn {
+				background-color: red;
+				color: white;
+				border: none;
+				padding: 10px 20px;
+				border-radius: 5px;
+				cursor: pointer;
+				font-weight: bold;
+				transition: background-color 0.3s;
+				margin-top: 20px;
+				display: block;
+				width: 200px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			/* Hover эффект для кнопки удаления */
+			.delete-account-btn:hover {
+				background-color: darkred;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<p class="student-info">Бугаёва Наталья Владимировна ФБИ-21</p>
+			<nav>
+				{% if current_user.is_authenticated %}
+				<a href="{{ url_for('logout') }}">Logout</a>
+				{% else %}
+				<a href="{{ url_for('login') }}">Login</a>
+				<a href="{{ url_for('register') }}">Register</a>
+				{% endif %}
+			</nav>
+		</header>
+
+		<main class="container">
+			<h1>
+				Welcome to the Messenger, <strong>{{ current_user.username }}</strong>!
+			</h1>
+			<!-- Кнопка удаления аккаунта -->
+			<form method="POST" action="{{ url_for('delete_account') }}">
+				<button type="submit" class="delete-account-btn">Delete Account</button>
+			</form>
+			<div class="user-list">
+				{% for user in users %}
+				<a href="{{ url_for('chat', user_id=user.id) }}" class="user">
+					<div class="user-link">
+						<div class="user-info">
+							<p>{{ user.username }}</p>
+
+							{% set last_message = last_messages.get(user.id) %} {% if
+							last_message %}
+							<p class="last-message">
+								<strong>{{ last_message.sender.username }}:</strong> {{
+								last_message.text }}
+							</p>
+							<p class="message-time">
+								{{ last_message.timestamp.strftime('%Y-%m-%d %H:%M') }}
+							</p>
+							{% else %}
+							<p class="last-message"><strong>No messages yet.</strong></p>
+							{% endif %}
+						</div>
+					</div>
+					<!-- Кнопка "Open Chat" -->
+					<button class="open-chat-btn">Open Chat</button>
+				</a>
+				{% endfor %}
+			</div>
+
+			<div class="message">
+				{% with messages = get_flashed_messages(with_categories=true) %} {% if
+				messages %}
+				<div class="flash-messages-container">
+					{% for category, message in messages %}
+					<div class="flash-message {{ category }}">{{ message }}</div>
+					{% endfor %}
+				</div>
+				{% endif %} {% endwith %} {% block content %}{% endblock %}
+			</div>
+		</main>
+	</body>
+</html>

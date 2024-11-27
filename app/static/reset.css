@@ -1,0 +1,98 @@
+/* Reset CSS - Сбрасывает стили по умолчанию */
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* Убирает стандартные стили у body */
+body {
+	line-height: 1.5;
+	font-family: Arial, sans-serif;
+	color: #333;
+	background-color: #f4f4f9;
+}
+
+/* Убирает стили у заголовков */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: normal;
+	margin-bottom: 0.5em;
+}
+
+/* Убирает подчеркивания и стили ссылок */
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+/* Убирает маркеры у списков */
+ul,
+ol {
+	list-style: none;
+}
+
+/* Убирает границы у изображений */
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+/* Убирает отступы у таблиц */
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+/* Убирает отступы у форм */
+form {
+	margin: 0;
+	padding: 0;
+}
+
+/* Убирает стандартные стили у кнопок */
+button {
+	border: none;
+	background: none;
+	cursor: pointer;
+	padding: 0;
+}
+
+/* Убирает стили у полей ввода */
+input,
+textarea,
+select {
+	border: none;
+	outline: none;
+	background: none;
+}
+
+/* Настроим стандартные стили для input, textarea */
+input,
+textarea {
+	font-family: inherit;
+	font-size: inherit;
+}
+
+/* Убирает стили у цитат */
+blockquote {
+	margin: 0;
+}
+
+/* Сбрасывает стили у элементов формы */
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
