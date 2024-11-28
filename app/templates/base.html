@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,7 +7,7 @@
 			rel="stylesheet"
 			href="{{ url_for('static', filename='style.css') }}"
 		/>
-		<title>Flask Project</title>
+		<title>Мессенджер Boo</title>
 
 		<script>
 			// Удаление сообщений после 4 секунд
@@ -26,10 +26,10 @@
 			<p class="student-info">Бугаёва Наталья Владимировна ФБИ-21</p>
 			<nav>
 				{% if current_user.is_authenticated %}
-				<a href="{{ url_for('logout') }}">Logout</a>
+				<a href="{{ url_for('logout') }}">Выйти</a>
 				{% else %}
-				<a href="{{ url_for('login') }}">Login</a>
-				<a href="{{ url_for('register') }}">Register</a>
+				<a href="{{ url_for('login') }}">Вход</a>
+				<a href="{{ url_for('register') }}">Регистрация</a>
 				{% endif %}
 			</nav>
 		</header>
