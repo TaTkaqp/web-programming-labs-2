@@ -44,9 +44,9 @@ def api():
 
     if method == 'info':
         if current_app.config['DB_TYPE'] == 'postgres':
-            cur.execute("SELECT * FROM offices ORDER BY CAST(number AS INTEGER);")
+            cur.execute("SELECT * FROM offices;")
         else:
-            cur.execute("SELECT * FROM offices ORDER BY CAST(number AS INTEGER);")
+            cur.execute("SELECT * FROM offices;")
         offices = cur.fetchall()
         
         return {
@@ -161,4 +161,3 @@ def api():
         },
         'id': id
     }
-
