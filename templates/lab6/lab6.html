@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {# номер лабораторной работы: #}
-{% block lab %}Лабораторная работа 6{% endblock %}
+{% block lab %}Лабораторная работа 6***{% endblock %}
 
 {# Java Script #}
 {% block script %}
@@ -28,31 +28,17 @@
             for (let i = 0; i < office_list.length; i++) {
                 const office = office_list[i];
                 const li = document.createElement('li');
-                li.style.borderRadius = '20px'
-                li.style.boxShadow = '4px 4px 10px rgba(75, 75, 75, 0.568)'
-                li.style.width = '200px'
-                li.style.margin = '17px'
-                li.style.padding = '20px'
-                li.style.display = 'inline-block'
-                li.style.backgroundColor = 'rgb(232, 232, 232)'
-                li.style.lineHeight = '30px'
-                li.innerText = `Офис ${office.number} (стоимость: ${office.price} руб): ${office.tenant || 'свободен'}`;
+                
+                li.innerText = `${office.number} (стоимость: ${office.price} руб): ${office.tenant || 'свободен'}`;
                 const bookingButton = document.createElement('button');
                 bookingButton.innerText = 'Зарезервировать';
                 bookingButton.onclick = function() { booking(office.number) };
-                bookingButton.style.borderRadius = '9px'
-                bookingButton.style.border = '1px'
-                bookingButton.style.padding = '7px'
-                bookingButton.style.margin = '5px'
-                bookingButton.style.backgroundColor = 'rgb(220, 217, 248)'
+              
                 li.appendChild(bookingButton);
                 const cancellationButton = document.createElement('button');
                 cancellationButton.innerText = 'Освободить';
                 cancellationButton.onclick = function() { cancellation(office.number) };
-                cancellationButton.style.borderRadius = '9px'
-                cancellationButton.style.border = '1px'
-                cancellationButton.style.padding = '7px'
-                cancellationButton.style.margin = '5px'
+              
                 
                 li.appendChild(cancellationButton);
                 ul.appendChild(li);

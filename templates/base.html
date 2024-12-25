@@ -25,7 +25,9 @@
             color: {{ request.cookies.get('headers') }}; 
             {% endif %} 
         }
-    </style> 
+    </style>
+    {% block script %}{% endblock %}
+
 </head>
 <body>
     <header>

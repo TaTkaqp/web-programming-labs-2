@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block lab %}  Лабораторная работа 7 {% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='lab7/main.js') }}"></script>
+<style>
+    .modal {
+        display: none;
+        z-index: 100;
+        box-shadow: 4px 4px 10px rgba(75, 75, 75, 0.568);
+        background-color: rgb(248, 237, 217);
+        width: 500px;
+        left: 50%;
+        top: 220px;
+        margin-left: -200px;
+        position: absolute;
+        padding: 30px;
+        line-height: 30px;
+    }
+</style>
+{% endblock %}
+
+{% block main %}
+    <div class="list">
+        <h1 class="center header12">Список фильмов</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">Название</th>
+                    <th>Год</th>
+                    <th>Действие</th>
+                </tr>
+            </thead>
+            <tbody id="film-list"></tbody>
+        </table>
+
+        <script>
+            fillFilmList();
+        </script>
+
+        <div class="center">
+            <button class="userinfo forbutton addfilm" onclick="addFilm()">Добавить фильм</button>
+        </div>
+    </div>
+
+    <div class="modal">
+        <input type="hidden" id="id">
+        <label>
+            Название фильма на русском языке:<br>
+            <input class="userinfo" type="text" id="title-ru"><br>
+            <span class="error" id="titleru-error"></span>
+        </label><br>
+
+        <label>
+            Название фильма на оригинальном языке:<br>
+            <i>(если фильм русский, то оставьте поле пустым)</i><br>
+            <input class="userinfo" type="text" id="title"><br>
+            <span class="error" id="title-error"></span>
+        </label><br>
+
+        <label>
+            Год выпуска:<br>
+            <input class="userinfo" type="number" id="year"><br>
+            <span class="error" id="year-error"></span>
+        </label><br>
+
+        <label>
+            Описание:<br>
+            <textarea class="userinfo" id="description"></textarea><br>
+            <span class="error" id="description-error"></span>
+        </label><br>
+
+        <div class="center">
+            <button onclick="sendFilm()">ОК</button>
+            <button onclick="cancel()">Отмена</button>
+        </div>
+    </div>
+{% endblock %}

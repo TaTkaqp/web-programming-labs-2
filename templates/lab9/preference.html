@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block lab %}  Лабораторная работа 9 {% endblock %}
+
+{% block main %}
+    <h1>Ваши предпочтения</h1>
+
+        <form method="post">
+            <label for="preference">Что вам больше нравится?</label>
+            <select id="preference" name="preference" required>
+                <option value="вкусное">Что-то вкусное</option>
+                <option value="красивое">Что-то красивое</option>
+            </select>
+            <input type="submit" value="Далее">
+        </form>
+
+{% endblock %}

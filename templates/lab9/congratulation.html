@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block lab %}  Лабораторная работа 9 {% endblock %}
+
+{% block main %}
+    <h2>{{ message }}</h2>
+    <div><img src="{{ url_for('static', filename=image) }}"></div>
+
+    <div><a href="{{ url_for('lab9.reset') }}">Сбросить и начать заново</a></div>
+{% endblock %}
