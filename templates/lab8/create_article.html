@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{# номер лабораторной работы: #}
+{% block lab %}  Лабораторная работа 8 {% endblock %}
+
+{# основной контент: #}
+{% block main %}
+    <h1 class="header5 center">База знаний</h1>
+    {% if login %}
+        <div class="center">{{ login }}</div>
+    {% else %}
+        <div class="center">Anonymous</div>
+    {% endif %}
+    <div class="center">
+        <div class="article article6"><a href="/lab8/login">Вход</a></div>
+        <div class="article article6"><a href="/lab8/register">Регистрация</a></div>
+        <div class="article article6"><a href="/lab8/articles">Список статей</a></div>
+        <div class="article article6 knowledge4"><a href="/lab8/create">Создать статью</a></div>
+        <div class="article article6"><a href="/lab8/public_articles">Публичные статьи</a></div>
+    </div>
+    <div class="list knowledge4">
+        <h1 class="header5 center">Создание статьи</h1>
+        <form method="post">
+            <div>
+                <label>
+                    Название статьи:
+                    <input class="userinfo" type="text" maxlength="50" name="title" value="{{ title or '' }}">
+                </label>
+            </div>
+
+            <div>
+                <textarea class="userinfo" name="article_text">{{ article_text or '' }}</textarea>
+            </div>
+
+            <div>
+                <label>
+                    <input type="checkbox" name="is_public"> Сделать статью публичной
+                </label>
+            </div>
+
+            {% if error %}
+                <div class="error">{{ error }}</div>
+            {% endif %}
+
+            <div class="center">
+                <button class="userinfo forbutton" type="submit">Готово</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
