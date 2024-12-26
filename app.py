@@ -18,6 +18,31 @@ from lab9 import lab9
 
 app = Flask(__name__)
 
+# Настройка SECRET_KEY и DB_TYPE
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'BOOKA')
+app.config['DB_TYPE'] = os.getenv('DB_TYPE', 'postgres')
+
+# Настройка SQLALCHEMY_DATABASE_URI
+if app.config['DB_TYPE'] == 'postgres':
+    db_name = 'natalya_bugaeva_orm'
+    db_user = 'natalya_bugaeva_orm'
+    db_password = '123'
+    host_ip = '127.0.0.1'
+    host_port = 5432
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{db_user}:{db_password}@{host_ip}:{host_port}/{db_name}'
+else:
+    dir_path = path.dirname(path.realpath(__file__))
+    db_path = path.join(dir_path, "natalya_bugaeva_orm.db")
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
+
+# Отключаем предупреждение
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Инициализация SQLAlchemy
+db.init_app(app)
+
+# Инициализация Flask-Login
 login_manager = LoginManager()
 login_manager.login_view = 'lab8.login'
 login_manager.init_app(app)
@@ -26,25 +51,7 @@ login_manager.init_app(app)
 def load_users(login_id):
     return users.query.get(int(login_id))
 
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'BOOKA')
-app.config['DB_TYPE'] = os.getenv('DB_TYPE', 'postgres')
-
-if app.config['DB_TYPE']=='postgres':
-        db.init_app(app)
-        db_name='natalya_bugaeva_orm'
-        db_user='natalya_bugaeva_orm'
-        db_password='123'
-        host_ip='127.0.0.1'
-        host_port=5432
-
-        app.config['SQLALCHEMY_DATABASE_URI']=f'postgresql://{db_user}:{db_password}@{host_ip}:{host_port}/{db_name}'
-else:
-        dir_path=path.dirname(path.realpath(__file__))
-        db_path=path.join(dir_path,"natalya_bugaeva_orm.db")
-        app.config['SQLALCHEMY_DATABASE_URI']=f'sqlite:///{db_path}'
-
-db.init_app(app)
-
+# Регистрация Blueprint
 app.register_blueprint(lab1)
 app.register_blueprint(lab2)
 app.register_blueprint(lab3)
