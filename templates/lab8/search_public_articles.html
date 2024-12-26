@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{# номер лабораторной работы: #}
+{% block lab %}  Лабораторная работа 8 {% endblock %}
+
+{# основной контент: #}
+{% block main %}
+    <h1 class="header4 center">База знаний</h1>
+    {% if login %}
+        <div class="center">{{ login }}</div>
+    {% else %}
+        <div class="center">Anonymous</div>
+    {% endif %}
+    <div class="center">
+        <div class="article article7"><a href="/lab8/login">Вход</a></div>
+        <div class="article article7"><a href="/lab8/register">Регистрация</a></div>
+        <div class="article article7"><a href="/lab8/articles">Список статей</a></div>
+        <div class="article article7"><a href="/lab8/create">Создать статью</a></div>
+        <div class="article article7 knowledge5"><a href="/lab8/public_articles">Публичные статьи</a></div>
+    </div>
+    <h2 class="header4 center">Результаты поиска по публичным статьям</h2>
+    <div class="articles knowledge5">
+        {% if public_articles %}
+            {% if query %}
+                <h3 class="header4 center">Поиск по запросу: "{{ query }}"</h3>
+            {% endif %}
+            <ul>
+                {% for article in public_articles %}
+                <a href="/lab8/articles/{{ article.id }}"><h2 class="public">{{ article.title }}</h2></a>
+                <blockquote>{{ article.article_text[:100] }}...</blockquote>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h2 class="header4 center forheader">Нет публичных статей, соответствующих этому запросу.</h2>
+        {% endif %}
+    </div>
+{% endblock %}
