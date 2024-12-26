@@ -1,27 +1,50 @@
 {% extends "base.html" %}
 
-{% block lab %}Лабораторная работа 8{% endblock %}
+{# номер лабораторной работы: #}
+{% block lab %}  Лабораторная работа 8 {% endblock %}
+
+{# основной контент: #}
 {% block main %}
-
-    <h1>Регистрация</h1>
-
-    <form action="/lab8/register" method="post">
-
-        <div>
-            <label>
-                Логин <input type="text" name="login">
-            </label>
+    <h1 class="header8 center">База знаний</h1>
+    {% if login %}
+        <div class="center">{{ login }}</div>
+    {% else %}
+        <div class="center">Anonymous</div>
+    {% endif %}
+    <div class="center">
+        <div class="article article2"><a href="/lab8/login">Вход</a></div>
+        <div class="article article2 knowledge"><a href="/lab8/register">Регистрация</a></div>
+        <div class="article article2"><a href="/lab8/articles">Список статей</a></div>
+        <div class="article article2"><a href="/lab8/create">Создать статью</a></div>
+        <div class="article article2"><a href="/lab8/public_articles">Публичные статьи</a></div>
+    </div>
+    {% if message %}
+        <div class="list knowledge">
+            <h2 class="header8 center forheader">{{ message }}</h2>
         </div>
+        <div class="center"><div class="article article2"><a href="/lab8/logout">Выйти</a></div></div>
+    {% else %}
+        <div class="list knowledge">
+            <h1 class="header8 center">Регистрация</h1>
+            <form action="/lab8/register" method="post">
+                <div>
+                    <label>
+                        Логин: <input class="userinfo" type="text" name="login">
+                    </label>
+                </div>
 
-        <div>
-            <label>
-                Пароль: <input type="password" name="password">
-            </label>
+                <div>
+                    <label>
+                        Пароль: <input class="userinfo" type="password" name="password">
+                    </label>
+                </div>
 
+                {% if error %}
+                    <div class="error">{{ error }}</div>
+                {% endif %}
+
+                <div class="center"><button class="userinfo forbutton" type="submit">Зарегистрироваться</button></div>
+            </form>
         </div>
-        {% if error %}
-            <div style="color: red;">{{ error }}</div>
-        {% endif %}
-        <button type="submit">Зарегистрироватся</button>
-    </form>
+    {% endif %}
 {% endblock %}

@@ -1,44 +1,21 @@
 {% extends "base.html" %}
 
-{% block lab %}Лабораторная работа 8{% endblock %}
+{# номер лабораторной работы: #}
+{% block lab %}  Лабораторная работа 8 {% endblock %}
+
+{# основной контент: #}
 {% block main %}
-    <h1>База знаний</h1>
-
-    <div>
-        <p>Добро пожаловать, {{login if login else "anonumus"}}!</p>
-    </div>
-
-    <!-- Контейнер для ссылок, стилизованных как кнопки -->
-    <div class="link-container">
-        <a href="/lab8/login" class="button-link">Вход</a>
-        <a href="/lab8/register" class="button-link">Регистрация</a><br>
-        <a href="/lab8/articles" class="button-link">Список статей</a>
-        <a href="/lab8/create" class="button-link">Создать статью</a><br>
-        {% if login %}
-        <a href="/lab8/logout" class="button-link">Выйти</a>
+    <h1 class="header9 center">База знаний</h1>
+    {% if login %}
+        <div class="center">{{ login }}</div>
+    {% else %}
+        <div class="center">Anonymous</div>
     {% endif %}
+    <div class="center">
+        <div class="article article1"><a href="/lab8/login">Вход</a></div>
+        <div class="article article1"><a href="/lab8/register">Регистрация</a></div>
+        <div class="article article1"><a href="/lab8/articles">Список статей</a></div>
+        <div class="article article1"><a href="/lab8/create">Создать статью</a></div>
+        <div class="article article1"><a href="/lab8/public_articles">Публичные статьи</a></div>
     </div>
-
-    <style>
-        /* Стили для контейнера */
-        .link-container {
-            display: flex;
-            justify-content: center;
-            gap: 14px;
-            padding: 15px;
-            margin-top: 15px;
-        }
-
-        /* Стили для каждой ссылки, чтобы выглядела как кнопка */
-        .button-link {
-            padding: 8px 15px;
-            background-color: lightgoldenrodyellow;
-            border: 1px solid #c0c0c0;
-            border-radius: 5px;
-            color: #000;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-    </style>
 {% endblock %}

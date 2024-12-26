@@ -1,43 +1,39 @@
 {% extends "base.html" %}
 
-{% block lab %}Публичные статьи{% endblock %}
+{# номер лабораторной работы: #}
+{% block lab %}  Лабораторная работа 8 {% endblock %}
+
+{# основной контент: #}
 {% block main %}
-
-<h1>Публичные статьи</h1>
-
-{% if articles %}
-    <ul>
+    <h1 class="header4 center">База знаний</h1>
+    {% if login %}
+        <div class="center">{{ login }}</div>
+    {% else %}
+        <div class="center">Anonymous</div>
+    {% endif %}
+    <div class="center">
+        <div class="article article7"><a href="/lab8/login">Вход</a></div>
+        <div class="article article7"><a href="/lab8/register">Регистрация</a></div>
+        <div class="article article7"><a href="/lab8/articles">Список статей</a></div>
+        <div class="article article7"><a href="/lab8/create">Создать статью</a></div>
+        <div class="article article7 knowledge5"><a href="/lab8/public_articles">Публичные статьи</a></div>
+    </div>
+    {% if articles %}
+        <h1 class="header4 center">Публичные статьи</h1>
+        <div class="articles knowledge5">
+        <h3 class="header4">Поиск по публичным статьям</h3>
+        <form method="get" action="/lab8/public_search" class="search-form">
+            <input class="userinfo" type="text" name="q" placeholder="Поиск..." required>
+            <button class="userinfo" type="submit">Поиск</button>
+        </form>
         {% for article in articles %}
-            <li>
-                <h3>{{ article.title }}</h3>
-                <p>{{ article.article_text }}</p>
-                <p><strong>Автор:</strong> {{ article.user.login}}</p>
-            </li>
+            <a href="/lab8/articles/{{ article.id }}"><h2 class="public">{{ article.title }}</h2></a>
+            <blockquote>{{ article.article_text[:100] }}...</blockquote>
         {% endfor %}
-    </ul>
-{% else %}
-    <p>Нет доступных публичных статей.</p>
-{% endif %}
-
-<a href="/lab8/" class="button-link">Вернуться на главную</a>
-
-<style>
-    .button-link {
-        display: inline-block;
-        padding: 10px 15px;
-        background-color: lightgray;
-        color: black;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-        margin-top: 15px;
-    }
-
-    .button-link:hover {
-        background-color: darkgray;
-        color: white;
-    }
-
-</style>
-
+        </div>
+    {% else %}
+        <div class="list knowledge5">
+            <h2 class="header4 center">Публичных статей не найдено</h2>
+        </div>
+    {% endif %}
 {% endblock %}

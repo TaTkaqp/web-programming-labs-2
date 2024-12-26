@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{# номер лабораторной работы: #}
+{% block lab %}  Лабораторная работа 8 {% endblock %}
+
+{# основной контент: #}
+{% block main %}
+    <h1 class="header6 center">База знаний</h1>
+    {% if login %}
+        <div class="center">{{ login }}</div>
+    {% else %}
+        <div class="center">Anonymous</div>
+    {% endif %}
+    <div class="articles knowledge2">
+        <h1 class="title {{ 'public' if article.is_public else 'favorite' }}">{{ article.title }}</h1>
+        <div>{{ article.article_text }}</div>
+    </div>
+    {% if login %}
+        <div class="center">
+            <div class="article article4"><a href="/lab8/articles/">Перейти к списку статей</a></div>
+        </div>
+    {% else %}
+        <div class="center">
+            <div class="article article4"><a href="/lab8/public_articles">Вернуться к публичным статьям</a></div>
+        </div>
+    {% endif %}
+{% endblock %}
