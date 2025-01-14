@@ -21,7 +21,24 @@
 </style>
 {% endblock %}
 
+{% block main %}
+    <div class="list">
+        <h1 class="center header12">Список фильмов</h1>
 
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">Название</th>
+                    <th>Год</th>
+                    <th>Действие</th>
+                </tr>
+            </thead>
+            <tbody id="film-list"></tbody>
+        </table>
+
+        <script>
+            fillFilmList();
+        </script>
 
         <div class="center">
             <button class="userinfo forbutton addfilm" onclick="addFilm()">Добавить фильм</button>
