@@ -18,7 +18,7 @@
         <div class="article article7"><a href="/lab8/create">Создать статью</a></div>
         <div class="article article7 knowledge5"><a href="/lab8/public_articles">Публичные статьи</a></div>
     </div>
-    <h2 class="header4 center">Результаты поиска по публичным статьям</h2>
+    <h2 class="header4 center">Результаты поиска по публичным статьям.</h2>
     <div class="articles knowledge5">
         {% if public_articles %}
             {% if query %}
@@ -31,7 +31,7 @@
                 {% endfor %}
             </ul>
         {% else %}
-            <h2 class="header4 center forheader">Нет публичных статей, соответствующих этому запросу.</h2>
+            <h2 class="header4 center forheader">Нет публичных статей, соответствующих этому запросу</h2>
         {% endif %}
     </div>
 {% endblock %}
