@@ -30,7 +30,9 @@ def db_close(conn, cur):
     conn.close()
 
 
-
+@lab6.route('/lab6/')
+def lab():
+    return render_template('lab6/lab6.html')
 
 
 @lab6.route('/lab6/json-rpc-api/', methods=['POST'])
