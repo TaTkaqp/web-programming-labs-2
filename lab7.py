@@ -76,7 +76,7 @@ def put_film(id):
     current_year = datetime.now().year
     year = int(film['year'])
     if year < 1895 or year > current_year:
-        return {'year': f'Год должен быть от 1895 до {current_year}'}, 400
+        return {'year': f'Год должен быть от 1890 до {current_year}'}, 400
     if film['description'] == '':
         return {'description': 'Заполните описание'}, 400
     if film['title'] == '':
