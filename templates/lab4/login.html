@@ -6,7 +6,7 @@
 {# основной контент: #}
 {% block main %}
     {% if authorized %}
-        <h1>Добро пожаловать, {{ name }}!</h1>
+        <h1>Добро пожаловать, {{ name }}</h1>
         <form action="/lab4/logout" method="post">
             <button>Выход</button>
         </form>
