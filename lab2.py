@@ -7,6 +7,7 @@ def a():
     return 'без слэша'
 
 
+
 @lab2.route("/lab2/a/")
 def a2():
     return 'со слэшем'
