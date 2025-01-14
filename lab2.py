@@ -20,12 +20,7 @@ flower_list = [
     {'name': 'ромашка', 'price': 100},
 ]
 
-@lab2.route("/lab2/flowers/<int:flower_id>")
-def flowers(flower_id):
-    if flower_id >= len(flower_list):
-        return render_template('lab2/flower_id404.html'), 404
-    else:
-        return render_template('lab2/flower_id.html', flower_id=flower_id, flower_list=flower_list)
+
 
 
 @lab2.route("/lab2/add_flower/<name>/<int:price>")
