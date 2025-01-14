@@ -147,7 +147,7 @@ def login():
         if login == user['login'] and password == user['password'] and name == user['name'] and sex == user['sex']:
             session['name'] = name
             return redirect('/lab4/login')
-    error = 'Ошибка: неверно введены данные'
+    error = 'Ошибка: неверно введены данные.'
     if name == '':
         error = 'Ошибка: не введёно имя пользователя'
     elif login == '':
