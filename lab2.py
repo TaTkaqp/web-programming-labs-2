@@ -77,7 +77,7 @@ def delete_flower():
 
 @lab2.route("/lab2/example")
 def example():
-    name = 'Бугаева Наталья'
+    name = 'Бугаёва Наталья'
     number = '2'
     group = 'ФБИ-21'
     course = '3 курс'
