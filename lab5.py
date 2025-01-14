@@ -56,7 +56,7 @@ def register():
         cur.execute("SELECT login FROM users WHERE login=?;", (login, ))
     if cur.fetchone():
         db_close(conn, cur)
-        return render_template('lab5/register.html', error='Такой пользователь уже существует')
+        return render_template('lab5/register.html', error='Такой пользователь уже существует.')
 
     password_hash = generate_password_hash(password)
     if current_app.config['DB_TYPE'] == 'postgres':
