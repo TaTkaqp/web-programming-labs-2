@@ -33,7 +33,7 @@ def register():
 
     login_exists = users.query.filter_by(login = login_form).first()
     if login_exists:
-        return render_template('lab8/register.html', error='Такой пользователь уже существует!')
+        return render_template('lab8/register.html', error='Такой пользователь уже существует')
 
     password_hash = generate_password_hash(password_form)
     new_user = users(login = login_form, password = password_hash)
