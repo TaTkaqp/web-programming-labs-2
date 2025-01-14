@@ -37,9 +37,9 @@ def form1():
     age = request.args.get('age')
     sex = request.args.get('sex')
     if user == '':
-        errors['user'] = 'Заполните поле ввода имени!'
+        errors['user'] = 'Заполните поле ввода имени'
     elif age == '':
-        errors['age'] = 'Заполните поле ввода возраста!'
+        errors['age'] = 'Заполните поле ввода возраста'
     return render_template('lab3/form1.html', user=user, age=age, sex=sex, errors=errors)
 
 
