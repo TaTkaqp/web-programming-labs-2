@@ -348,7 +348,6 @@ def error_418():
     </html>
     ''', 418
 
-
 @lab1.route("/lab1/error")
 def generate_error():
     # Пример ошибки деления на ноль
@@ -396,3 +395,15 @@ def student_choice():
         'X-Author': 'Student',  # Нестандартный заголовок
         'X-Powered-By': 'FlaskApp'  # Нестандартный заголовок
     }
+
+@lab1.route("/lab1/error500")
+def error500():
+    number = 500
+    return '''
+<!DOCTYPE html>
+<html lang="ru">
+    <body>
+        <h1>Ошибка ''' + number + '''</h1>
+    </body>
+</html>
+'''

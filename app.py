@@ -151,6 +151,7 @@ def handle_404_error(err):
 @app.errorhandler(500)
 def internal_server_error(err):
     css_path = url_for("static", filename="lab1.css")
+    img_path = url_for("static", filename="505.png")
     
     return f'''
     <!doctype html>
@@ -189,6 +190,7 @@ def internal_server_error(err):
         <body>
             <div class="container">
                 <h1>Ошибка 500 - Внутренняя ошибка сервера</h1>
+                <img src="{img_path}" alt="505 error">
                 <p>На сервере произошла ошибка. Пожалуйста, попробуйте позже.</p>
                 <a href="/">Вернуться на главную</a>
             </div>
