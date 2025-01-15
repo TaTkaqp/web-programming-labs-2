@@ -61,6 +61,7 @@ app.register_blueprint(lab6)
 app.register_blueprint(lab7)
 app.register_blueprint(lab8)
 app.register_blueprint(lab9)
+app.register_blueprint(messanger)
 
 
 @app.route("/")
@@ -86,6 +87,7 @@ def index():
                 <li><a href="/lab7/">Лабораторная работа 7</a></li>
                 <li><a href="/lab8/">Лабораторная работа 8</a></li>
                 <li><a href="/lab9/">Лабораторная работа 9</a></li>
+                <li><a href="/lab9/">РГЗ messanger</a></li>
             </ul>
         </body>
     </html>
