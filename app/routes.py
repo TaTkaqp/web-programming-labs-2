@@ -11,8 +11,7 @@ import re
 def index():
     # Если текущий пользователь администратор, перенаправляем его на панель администратора
     if current_user.is_admin():
-        return redirect(url_for('admin'))  # Панель администратора
-
+        return redirect(url_for('admin'))
     # Получение всех пользователей, кроме текущего
     users = User.query.filter(User.id != current_user.id, User.role != 'admin').all()
 
@@ -192,7 +191,7 @@ def login():
 
     return render_template('login.html')
 
-# Выход
+
 @app.route('/logout')
 @login_required
 def logout():
