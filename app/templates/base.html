@@ -8,18 +8,6 @@
 			href="{{ url_for('static', filename='style.css') }}"
 		/>
 		<title>Мессенджер Boo</title>
-
-		<script>
-			// Удаление сообщений после 4 секунд
-			window.onload = function () {
-				setTimeout(function () {
-					let flashMessages = document.querySelectorAll(".flash-message");
-					flashMessages.forEach(function (message) {
-						message.classList.add("fade-out"); // Добавляем класс для анимации
-					});
-				}, 4000); // Сообщения исчезнут через 4 секунды
-			};
-		</script>
 	</head>
 	<body>
 		<header>
@@ -33,7 +21,7 @@
 				{% endif %}
 			</nav>
 		</header>
-		<main>
+		<div class="message">
 			{% with messages = get_flashed_messages(with_categories=true) %} {% if
 			messages %}
 			<div class="flash-messages-container">
@@ -41,7 +29,20 @@
 				<div class="flash-message {{ category }}">{{ message }}</div>
 				{% endfor %}
 			</div>
+			<script>
+				// Автоматическое скрытие через 2 секунды
+				setTimeout(() => {
+					const flashMessages = document.querySelector(
+						".flash-messages-container"
+					);
+					if (flashMessages) {
+						flashMessages.style.transition = "opacity 0.5s ease"; // Плавное исчезновение
+						flashMessages.style.opacity = "0"; // Установка прозрачности
+						setTimeout(() => flashMessages.remove(), 500); // Удаление через 0.5 сек после исчезновения
+					}
+				}, 2000);
+			</script>
 			{% endif %} {% endwith %} {% block content %}{% endblock %}
-		</main>
+		</div>
 	</body>
 </html>
