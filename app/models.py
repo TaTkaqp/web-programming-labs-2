@@ -8,7 +8,6 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150), nullable=False)
     role = db.Column(db.String(50), default='user', nullable=False)
 
-    # Устанавливаем связи с сообщениями
     messages_sent = db.relationship('Message', backref='sender', lazy=True, foreign_keys='Message.sender_id', cascade="all, delete-orphan")
     messages_received = db.relationship('Message', backref='receiver', lazy=True, foreign_keys='Message.receiver_id', cascade="all, delete-orphan")
 
