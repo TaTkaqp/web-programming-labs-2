@@ -2,7 +2,7 @@ import os
 from app import app
 from dotenv import load_dotenv
 
-load_dotenv()  # Загружаем переменные из .env
+load_dotenv() 
 
 # Получаем режим работы из переменной окружения
 environment = os.environ.get("FLASK_ENV", "production")
